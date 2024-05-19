@@ -6,3 +6,4 @@ sql_app.db
 migrations/
 .idea/
 plain.output
+coverage.xml
