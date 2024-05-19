@@ -13,4 +13,4 @@ omit =
     manage.py
 [report]
 exclude_lines =
-    @abstract
+    @abstractmethod
