@@ -1,0 +1,16 @@
+[run]
+omit =
+    ./tests/*
+    ./src/gateway/*
+    */migrations/*
+    settings.py
+    asgi.py
+    admin.py
+    apps.py
+    *Interface.py
+    */asgi.py
+    */wsgi.py
+    manage.py
+[report]
+exclude_lines =
+    @abstract

@@ -1,8 +1,8 @@
 from uuid import UUID, uuid4
 from datetime import datetime
 
-from src.uitls.validar_uuid import validar_uuid
-
+from src.utils.validar_uuid import validar_uuid
+import copy
 
 def _validar_status(status: str) -> str:
     if status != 'aguardando_pagamento' and status != 'recebido' and status != 'cancelado':
@@ -15,14 +15,17 @@ class Cobranca:
     status: str
     valor: float
     fornecedor_meio_pagto: str
-    pix_codigo: str
-    data_criacao: datetime | None
 
+    fornecedor_codigo: str | None
+    pix_codigo: str | None
+    data_criacao: datetime | None
     cpf: str | None
-    id: UUID | str | None
+    id: UUID | None
     data_vencimento: datetime | None
 
-    def __init__(self, id_pedido: int, status: str, valor: float, fornecedor_meio_pagto: str, pix_codigo: str,
+    def __init__(self, id_pedido: int, status: str, valor: float, fornecedor_meio_pagto: str,
+                 fornecedor_codigo: str | None = None, fornecedor_url_pagamento: str | None = None,
+                 pix_codigo: str | None = None,
                  data_criacao: datetime | None = None, cpf: str | None = None, id: UUID | None = None,
                  data_vencimento: datetime | None = None):
 
@@ -30,8 +33,10 @@ class Cobranca:
         self.status = _validar_status(status)
         self.valor = valor
         self.fornecedor_meio_pagto = fornecedor_meio_pagto
+        self.fornecedor_codigo = fornecedor_codigo
         self.pix_codigo = pix_codigo
         self.cpf = cpf
+        self.fornecedor_url_pagamento = fornecedor_url_pagamento
         self.data_vencimento = data_vencimento
         if not id:
             self.id = uuid4()
@@ -46,3 +51,8 @@ class Cobranca:
         if self.status == 'recebido' or self.status == 'cancelado':
             raise AttributeError(f'Não é possível alterar status de cobrancas com o status {self.status}')
         self.status = status_validado
+
+    def dicionario(self):
+        dicionario = copy.deepcopy(self.__dict__)
+        dicionario['id'] = self.id.__str__()
+        return dicionario

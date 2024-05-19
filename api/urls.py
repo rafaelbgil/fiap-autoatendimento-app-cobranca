@@ -5,11 +5,10 @@ from . import views
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
-
-
 urlpatterns = [
-    #api endpoints
-    #path('cliente/', views.ClienteView.as_view(), name="Lista clientes"),
+    # api endpoints
+    path('cobranca/', views.CobrancaView.as_view(), name="cobranca"),
+    path('cobranca/<str:id>/', views.CobrancaDetalhesView.as_view(), name="cobranca_detalhes"),
 
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # Swager and redoc:

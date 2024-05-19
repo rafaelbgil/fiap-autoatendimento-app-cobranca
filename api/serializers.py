@@ -7,7 +7,16 @@ class CobrancaSerializer(serializers.Serializer):
     status = serializers.CharField(max_length=20)
     valor = serializers.FloatField()
     fornecedor_meio_pagto = serializers.CharField(max_length=20)
-    pix_codigo = serializers.CharField(max_length=300)
+    fornecedor_codigo = serializers.IntegerField(required=False)
+    pix_codigo = serializers.CharField(max_length=300, required=False)
     cpf = serializers.CharField(max_length=11, min_length=11, required=False)
-    data_vencimento = serializers.DateTimeField()
+    data_vencimento = serializers.DateTimeField(required=False)
     data_criacao = serializers.DateTimeField(required=False)
+
+
+class CobrancaCreateSerializer(serializers.Serializer):
+    id_pedido = serializers.IntegerField()
+    status = serializers.CharField(max_length=20)
+    valor = serializers.FloatField()
+    fornecedor_meio_pagto = serializers.CharField(max_length=20)
+    cpf = serializers.CharField(max_length=11, min_length=11, required=False)

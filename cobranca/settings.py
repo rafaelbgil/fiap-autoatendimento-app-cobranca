@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from os import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -71,6 +72,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cobranca.wsgi.application'
 
+if not environ.get('MONGODB_SERVER'):
+    raise Exception('Erro: varivel de ambiente MONGODB_SERVER nao definida')
+
+if not environ.get('MERCADOPAGO_TOKEN'):
+    raise Exception('Erro: varivel de ambiente MERCADOPAGO_TOKEN nao definida')
+
+if not environ.get('MERCADOPAGO_EMAIL'):
+    raise Exception('Erro: varivel de ambiente MERCADOPAGO_EMAIL nao definida')
+
+if not environ.get('URL_DOMINIO'):
+    raise Exception('Erro: varivel de ambiente URL_DOMINIO nao definida')
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -121,9 +134,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 REST_FRAMEWORK = {
-     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SPECTACULAR_SETTINGS = {
@@ -136,8 +148,3 @@ SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
     # OTHER SETTINGS
 }
-
-try:
-    environ.get('MONGODB_SERVER')
-except:
-    raise Exception('Erro: varivel de ambiente MONGODB_SERVER nao definida')

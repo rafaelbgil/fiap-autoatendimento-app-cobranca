@@ -1,3 +1,2 @@
-from django.shortcuts import render
-
-# Create your views here.
+from src.web.django_views.CobrancaView import CobrancaView
+from src.web.django_views.CobrancaDetalhesView import CobrancaDetalhesView
