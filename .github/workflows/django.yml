@@ -10,6 +10,11 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    env:
+      MONGODB_SERVER: 127.0.0.1
+      MERCADOPAGO_TOKEN: teste
+      MERCADOPAGO_EMAIL: teste
+      URL_DOMINIO: teste
     strategy:
       max-parallel: 4
       matrix:
@@ -41,10 +46,6 @@ jobs:
       DOCKER_HUB_REPOSITORY: ${{ vars.DOCKER_HUB_REPOSITORY }}
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      MONGODB_SERVER: 127.0.0.1
-      MERCADOPAGO_TOKEN: teste
-      MERCADOPAGO_EMAIL: teste
-      URL_DOMINIO: teste
     steps:
       - name: Assegurando copia do repositorio
         uses: actions/checkout@v4
