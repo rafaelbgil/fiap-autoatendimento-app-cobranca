@@ -33,6 +33,8 @@ jobs:
       - name: Run Tests
         run: |
           make test-xml
+        env:
+          DJANGO_KEY: ${{ secrets.DJANGO_KEY }}
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
