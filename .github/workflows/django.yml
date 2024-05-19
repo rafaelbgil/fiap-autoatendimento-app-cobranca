@@ -2,10 +2,10 @@ name: Django CI
 run-name: Django CI Fiap
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
     tags: [ "*" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
 jobs:
   tests:
