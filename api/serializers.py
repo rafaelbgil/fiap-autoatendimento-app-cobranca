@@ -20,3 +20,7 @@ class CobrancaCreateSerializer(serializers.Serializer):
     valor = serializers.FloatField()
     fornecedor_meio_pagto = serializers.CharField(max_length=20)
     cpf = serializers.CharField(max_length=11, min_length=11, required=False)
+
+
+class CobrancaWebHookSerializer(serializers.Serializer):
+    status = serializers.CharField(max_length=20)

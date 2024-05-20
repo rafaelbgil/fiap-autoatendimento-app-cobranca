@@ -47,8 +47,11 @@ class CobrancaView(APIView):
         else:
             raise AttributeError('Meio de pagamento invalida. opcoes validas: ["mercadopago" , "auto"]')
 
-        retorno_cobranca = UseCaseCobranca.adicionar_cobranca(respository=CobrancaMongodbRepository(),
-                                                              cobranca=cobranca,
-                                                              meio_pagamento=meio_pagamento)
+        try:
+            retorno_cobranca = UseCaseCobranca.adicionar_cobranca(respository=CobrancaMongodbRepository(),
+                                                                  cobranca=cobranca,
+                                                                  meio_pagamento=meio_pagamento)
+        except Exception as e:
+            return Response(data={"status": "erro", "detalhes": e.__str__()}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(data=retorno_cobranca.dicionario(), status=status.HTTP_201_CREATED)

@@ -22,3 +22,7 @@ class UseCaseCobranca:
     @staticmethod
     def obter_lista_cobrancas(repository: CobrancaRepository):
         return repository.obter_lista_cobrancas()
+
+    @staticmethod
+    def atualizar_status_cobranca(repository: CobrancaRepository, id: str, status: str):
+        return repository.atualizar_cobranca(id=id,status_novo=status)

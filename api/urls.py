@@ -10,6 +10,7 @@ urlpatterns = [
     path('cobranca/', views.CobrancaView.as_view(), name="cobranca"),
     path('cobranca/<str:id>/', views.CobrancaDetalhesView.as_view(), name="cobranca_detalhes"),
     path('cobranca/obter_por_id_pedido/<str:id>/', views.CobrancaPorIdPedidoView.as_view(), name="cobranca_por_id_pedido"),
+    path('cobranca/webhook/<str:id>/', views.CobrancaWebHookView.as_view(), name="cobranca_por_id_pedido"),
 
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # Swager and redoc:

@@ -42,6 +42,7 @@ class CobrancaMongodbRepository(CobrancaRepository):
             cobranca = self.obter_cobranca(id)
             cobranca.atualizar_status(status=status_novo)
             self.collection.update_one({'id': id}, {"$set": cobranca.dicionario()})
+            return cobranca
         except Exception as e:
             raise Exception(f'Nao foi possivel atualizar a cobranca {e.__str__()}')
 
