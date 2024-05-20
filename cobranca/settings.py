@@ -84,6 +84,9 @@ if not environ.get('MERCADOPAGO_EMAIL'):
 if not environ.get('URL_DOMINIO'):
     raise Exception('Erro: varivel de ambiente URL_DOMINIO nao definida')
 
+if not environ.get('PEDIDO_API_URL'):
+    raise Exception('Erro: varivel de ambiente PEDIDO_API_URL nao definida')
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 

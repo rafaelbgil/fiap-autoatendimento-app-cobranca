@@ -1,6 +1,7 @@
 from src.gateway.CobrancaRepository import CobrancaRepository
 from src.domain.entities.Cobranca import Cobranca
 from src.domain.usecases.interfaces.MeioPagamento import MeioPagamento
+from src.external.PedidoApi import PedidoApi
 
 
 class UseCaseCobranca:
@@ -14,7 +15,6 @@ class UseCaseCobranca:
     def obter_cobranca(repository: CobrancaRepository, id: str):
         return repository.obter_cobranca(id=id)
 
-
     @staticmethod
     def obter_cobranca_por_id_pedido(repository: CobrancaRepository, id: str):
         return repository.obter_cobranca_por_id_pedido(int(id))
@@ -25,4 +25,8 @@ class UseCaseCobranca:
 
     @staticmethod
     def atualizar_status_cobranca(repository: CobrancaRepository, id: str, status: str):
-        return repository.atualizar_cobranca(id=id,status_novo=status)
+        cobranca_atualizada = repository.atualizar_cobranca(id=id, status_novo=status)
+        if cobranca_atualizada:
+            api_pedido = PedidoApi()
+            api_pedido.atualizar_status_pedido(id_pedido=str(cobranca_atualizada.id_pedido),
+                                               status=cobranca_atualizada.status)
