@@ -34,6 +34,7 @@ jobs:
         run: |
           make test-xml
         env:
+          PEDIDO_API_URL: ${{ secrets.PEDIDO_API_URL }}
           DJANGO_KEY: ${{ secrets.DJANGO_KEY }}
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
