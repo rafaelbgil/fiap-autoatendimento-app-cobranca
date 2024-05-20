@@ -1,0 +1,389 @@
+openapi: 3.0.3
+info:
+  title: Api Cobranca de lanchonete
+  version: 1.0.0
+  description: Api de cobranca de lanchonetes - Fiap Pos-tech
+paths:
+  /cobranca/:
+    get:
+      operationId: cobranca_retrieve
+      description: Obtém lista de cobranças
+      tags:
+      - cobranca
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cobranca'
+          description: ''
+    post:
+      operationId: cobranca_create
+      description: Cria nova cobranca
+      summary: Adicionar nova cobranca
+      tags:
+      - cobranca
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CobrancaRequest'
+            examples:
+              ExemploDeUso:
+                value:
+                  id_pedido: 1
+                  status: aguardando_pagamento
+                  valor: 10.7
+                  fornecedor_meio_pagto: auto
+                summary: Exemplo de uso
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CobrancaRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CobrancaRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cobranca'
+          description: ''
+  /cobranca/{id}/:
+    get:
+      operationId: cobranca_retrieve_2
+      description: Obtém cobranca
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - cobranca
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cobranca'
+          description: ''
+  /cobranca/obter_por_id_pedido/{id}/:
+    get:
+      operationId: cobranca_obter_por_id_pedido_retrieve
+      description: Obtém cobranca
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - cobranca
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cobranca'
+          description: ''
+  /cobranca/webhook/{id}/:
+    post:
+      operationId: cobranca_webhook_create
+      description: Obtém cobranca
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - cobranca
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CobrancaWebHookRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CobrancaWebHookRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CobrancaWebHookRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CobrancaWebHook'
+          description: ''
+  /schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    Cobranca:
+      type: object
+      properties:
+        id_pedido:
+          type: integer
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        status:
+          type: string
+          maxLength: 20
+        valor:
+          type: number
+          format: double
+        fornecedor_meio_pagto:
+          type: string
+          maxLength: 20
+        fornecedor_codigo:
+          type: integer
+        pix_codigo:
+          type: string
+          maxLength: 300
+        cpf:
+          type: string
+          maxLength: 11
+          minLength: 11
+        data_vencimento:
+          type: string
+          format: date-time
+        data_criacao:
+          type: string
+          format: date-time
+      required:
+      - fornecedor_meio_pagto
+      - id
+      - id_pedido
+      - status
+      - valor
+    CobrancaRequest:
+      type: object
+      properties:
+        id_pedido:
+          type: integer
+        status:
+          type: string
+          minLength: 1
+          maxLength: 20
+        valor:
+          type: number
+          format: double
+        fornecedor_meio_pagto:
+          type: string
+          minLength: 1
+          maxLength: 20
+        fornecedor_codigo:
+          type: integer
+        pix_codigo:
+          type: string
+          minLength: 1
+          maxLength: 300
+        cpf:
+          type: string
+          minLength: 11
+          maxLength: 11
+        data_vencimento:
+          type: string
+          format: date-time
+        data_criacao:
+          type: string
+          format: date-time
+      required:
+      - fornecedor_meio_pagto
+      - id_pedido
+      - status
+      - valor
+    CobrancaWebHook:
+      type: object
+      properties:
+        status:
+          type: string
+          maxLength: 20
+      required:
+      - status
+    CobrancaWebHookRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 1
+          maxLength: 20
+      required:
+      - status
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
