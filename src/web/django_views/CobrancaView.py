@@ -25,6 +25,14 @@ class CobrancaView(APIView):
         lista_cobrancas = UseCaseCobranca.obter_lista_cobrancas(repository=CobrancaMongodbRepository())
         return Response(data=lista_cobrancas, status=status.HTTP_200_OK)
 
+    @extend_schema(summary='Adicionar nova cobranca', examples=[
+        OpenApiExample('Exemplo de uso',
+                       value={"id_pedido": 1,
+                              "status": 'aguardando_pagamento', "valor": 10.7, "fornecedor_meio_pagto": "auto"},
+                       request_only=True,
+                       response_only=False,
+                       )
+    ])
     def post(self, request):
         """
         Cria nova cobranca

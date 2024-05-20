@@ -23,4 +23,6 @@ class CobrancaDetalhesView(APIView):
         Obtém cobranca
         """
         cobranca = UseCaseCobranca.obter_cobranca(repository=CobrancaMongodbRepository(), id=id)
+        if not cobranca:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(data=cobranca.dicionario(), status=status.HTTP_200_OK)

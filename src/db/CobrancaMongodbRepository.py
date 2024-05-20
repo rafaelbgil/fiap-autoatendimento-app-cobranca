@@ -20,6 +20,11 @@ class CobrancaMongodbRepository(CobrancaRepository):
         self.collection = self.database.get_collection('cobrancas')
 
     def adicionar_cobranca(self, cobranca: Cobranca) -> Cobranca:
+
+        if self.obter_cobranca_por_id_pedido(cobranca.id_pedido):
+            raise AttributeError(
+                f'Nao foi possível criar a cobranca. Já existe uma cobranca com o id de pedido {cobranca.id_pedido}')
+
         try:
             self.collection.insert_one(cobranca.dicionario())
             return cobranca
@@ -30,7 +35,7 @@ class CobrancaMongodbRepository(CobrancaRepository):
         try:
             return CobrancaFactory.from_dict(self.collection.find_one({"id": id}))
         except Exception as e:
-            raise Exception(f'Nao foi possivel obter a cobranca: {e.__str__()}')
+            return None
 
     def atualizar_cobranca(self, id: str, status_novo: str):
         try:
@@ -40,7 +45,6 @@ class CobrancaMongodbRepository(CobrancaRepository):
         except Exception as e:
             raise Exception(f'Nao foi possivel atualizar a cobranca {e.__str__()}')
 
-
     def obter_lista_cobrancas(self):
         lista_cobrancas = []
         for cobranca_mongodb in self.collection.find():
@@ -48,9 +52,9 @@ class CobrancaMongodbRepository(CobrancaRepository):
             print(cobranca.dicionario())
             lista_cobrancas.append(cobranca.dicionario())
         return lista_cobrancas
+
     def obter_cobranca_por_id_pedido(self, id: int):
         try:
             return CobrancaFactory.from_dict(self.collection.find_one({"id_pedido": id}))
         except Exception as e:
-            raise Exception('Nao foi possivel obter a cobranca')
-
+            return None
