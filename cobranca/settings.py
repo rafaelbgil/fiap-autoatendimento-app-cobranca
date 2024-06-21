@@ -19,6 +19,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
+if not environ.get('MONGODB_SERVER'):
+    raise Exception('Erro: varivel de ambiente MONGODB_SERVER nao definida')
+
+if not environ.get('MERCADOPAGO_TOKEN'):
+    raise Exception('Erro: varivel de ambiente MERCADOPAGO_TOKEN nao definida')
+
+if not environ.get('MERCADOPAGO_EMAIL'):
+    raise Exception('Erro: varivel de ambiente MERCADOPAGO_EMAIL nao definida')
+
+if not environ.get('URL_DOMINIO'):
+    raise Exception('Erro: varivel de ambiente URL_DOMINIO nao definida')
+
+#if not environ.get('PEDIDO_API_URL'):
+#    raise Exception('Erro: varivel de ambiente PEDIDO_API_URL nao definida')
+
+if not os.environ.get('RABBIT_SERVER'):
+    raise Exception('Erro: varivel de ambiente RABBIT_SERVER nao definida')
+
+if not environ.get('DJANGO_KEY'):
+    raise Exception('Erro: varivel de ambiente DJANGO_KEY nao definida')
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_KEY')
 
@@ -72,20 +94,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cobranca.wsgi.application'
 
-if not environ.get('MONGODB_SERVER'):
-    raise Exception('Erro: varivel de ambiente MONGODB_SERVER nao definida')
-
-if not environ.get('MERCADOPAGO_TOKEN'):
-    raise Exception('Erro: varivel de ambiente MERCADOPAGO_TOKEN nao definida')
-
-if not environ.get('MERCADOPAGO_EMAIL'):
-    raise Exception('Erro: varivel de ambiente MERCADOPAGO_EMAIL nao definida')
-
-if not environ.get('URL_DOMINIO'):
-    raise Exception('Erro: varivel de ambiente URL_DOMINIO nao definida')
-
-if not environ.get('PEDIDO_API_URL'):
-    raise Exception('Erro: varivel de ambiente PEDIDO_API_URL nao definida')
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

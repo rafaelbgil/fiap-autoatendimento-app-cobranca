@@ -10,6 +10,7 @@ from src.db.CobrancaMongodbRepository import CobrancaMongodbRepository
 from src.domain.entities.CobrancaFactory import CobrancaFactory
 from src.external.MercadoPagoMeioPagamento import MercadoPagoMeioPagamento
 from src.external.AutoMeioPagamento import AutoMeioPagamento
+from api.tasks import atualizar_status_pagamento_queue
 
 
 class CobrancaWebHookView(APIView):
@@ -25,6 +26,8 @@ class CobrancaWebHookView(APIView):
         try:
             cobranca = UseCaseCobranca.atualizar_status_cobranca(repository=CobrancaMongodbRepository(), id=id,
                                                                  status=request.data['status'])
+            atualizar_status_pagamento_queue.delay(id_pedido=cobranca.id_pedido, status=request.data['status'])
+
         except Exception as e:
             return Response(data={"status" : "erro", "detalhes" : e.__str__()}, status=status.HTTP_400_BAD_REQUEST)
 

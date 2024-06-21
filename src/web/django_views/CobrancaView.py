@@ -3,14 +3,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from drf_spectacular.utils import extend_schema, OpenApiExample
 
-from api.serializers import CobrancaSerializer, CobrancaCreateSerializer
+from api.serializers import CobrancaSerializer
 
 from src.domain.usecases.UseCaseCobranca import UseCaseCobranca
 from src.db.CobrancaMongodbRepository import CobrancaMongodbRepository
 from src.domain.entities.CobrancaFactory import CobrancaFactory
 from src.external.MercadoPagoMeioPagamento import MercadoPagoMeioPagamento
 from src.external.AutoMeioPagamento import AutoMeioPagamento
-
 
 class CobrancaView(APIView):
     """

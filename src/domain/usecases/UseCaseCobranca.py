@@ -25,8 +25,5 @@ class UseCaseCobranca:
 
     @staticmethod
     def atualizar_status_cobranca(repository: CobrancaRepository, id: str, status: str):
-        cobranca_atualizada = repository.atualizar_cobranca(id=id, status_novo=status)
-        if cobranca_atualizada:
-            api_pedido = PedidoApi()
-            api_pedido.atualizar_status_pedido(id_pedido=str(cobranca_atualizada.id_pedido),
-                                               status=cobranca_atualizada.status)
+        return repository.atualizar_cobranca(id=id, status_novo=status)
+
