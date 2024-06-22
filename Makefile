@@ -20,5 +20,5 @@ test-xml:
 run:
 	python manage.py runserver 0.0.0.0:8091
 
-
-
+run-prod:
+	uwsgi --ini uwsgi.ini
